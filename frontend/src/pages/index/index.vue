@@ -54,17 +54,7 @@
             </view>
           </view>
 
-          <view class="assistant-stage">
-            <view class="assistant-rings">
-              <view class="ring outer"></view>
-              <view class="ring inner"></view>
-            </view>
-            <image
-              class="assistant-portrait"
-              src="/static/images/ai-assistant-reference.png"
-              mode="aspectFill"
-            />
-          </view>
+          <DigitalHumanAvatar />
         </view>
 
         <view class="assistant-message">
@@ -180,6 +170,7 @@
 import { onLoad } from '@dcloudio/uni-app'
 import { onMounted } from 'vue'
 
+import DigitalHumanAvatar from '@/components/digital-human/DigitalHumanAvatar.vue'
 import { useJob } from '@/composables/useJob.js'
 import { useAppStore } from '@/store/app.js'
 import { navigateTo } from '@/utils/navigation.js'
@@ -225,8 +216,8 @@ const resumePreview = {
 const appStore = useAppStore()
 const { loadRecommendedJobs } = useJob()
 
-onLoad((query) => {
-  appStore.setActiveTab(query?.tab || 'home')
+onLoad(() => {
+  appStore.setActiveTab('home')
 })
 
 function go(path) {
@@ -247,7 +238,7 @@ onMounted(() => {
   box-sizing: border-box;
   width: 100%;
   min-height: 100vh;
-  padding: 24rpx 28rpx 0;
+  padding: calc(24rpx + var(--status-bar-height, 0px)) 28rpx 0;
   background:
     linear-gradient(130deg, rgba(117, 92, 255, 0.12) 0%, rgba(4, 10, 24, 0) 32%),
     linear-gradient(180deg, #020816 0%, #06152a 48%, #020817 100%);
@@ -594,56 +585,6 @@ onMounted(() => {
   border-radius: 50%;
   background: #5ee7a8;
   box-shadow: 0 0 20rpx rgba(94, 231, 168, 0.82);
-}
-
-.assistant-stage {
-  position: absolute;
-  right: -28rpx;
-  bottom: -10rpx;
-  width: 392rpx;
-  height: 520rpx;
-  overflow: hidden;
-}
-
-.assistant-stage::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 150rpx;
-  background: linear-gradient(180deg, rgba(2, 8, 22, 0), #031025 72%);
-  content: '';
-}
-
-.assistant-rings {
-  position: absolute;
-  right: 12rpx;
-  bottom: 90rpx;
-  width: 320rpx;
-  height: 320rpx;
-}
-
-.ring {
-  position: absolute;
-  border: 2rpx solid rgba(124, 92, 255, 0.34);
-  border-radius: 50%;
-}
-
-.ring.outer {
-  inset: 0;
-}
-
-.ring.inner {
-  inset: 54rpx;
-  border-color: rgba(124, 92, 255, 0.18);
-}
-
-.assistant-portrait {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 350rpx;
-  height: 520rpx;
 }
 
 .assistant-message {

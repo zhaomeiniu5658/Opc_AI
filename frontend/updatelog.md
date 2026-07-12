@@ -1,5 +1,8 @@
 ﻿## 导航统一修复
 
+- 2026-07-12: Renamed the existing AI adviser tab to "数字人" and replaced its existing layout-shell placeholder with a digital-human chat surface. It adds persisted chat records, text input, Mini Program voice recording, and an in-app call interface without adding a page route or a second navigation implementation.
+- 2026-07-12: Kept the digital-human component mounted inside the existing layout shell and switched its visibility instead of recreating it through a Mini Program conditional component branch.
+- 2026-07-12: Reserved the Mini Program status-bar height above the home content so the top status and branding text are no longer obscured by the device safe area.
 - 2026-07-12: Kept the five custom bottom-navigation destinations inside the existing home layout shell, so switching tabs does not recreate a WeChat page. Direct business-page navigation still returns to the shell with `reLaunch`; repeated tab taps are ignored during that return.
 - 2026-07-12: Read the current Mini Program route through the native `getCurrentPages()` global, preventing the custom tab bar from treating every business page as the home shell.
 - 2026-07-12: Corrected the five custom bottom-navigation labels and aligned the global, app-root, and layout backgrounds to `#07111f`.

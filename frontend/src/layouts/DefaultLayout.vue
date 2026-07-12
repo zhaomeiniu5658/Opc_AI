@@ -1,6 +1,6 @@
 ﻿<template>
   <view class="default-layout">
-    <template v-if="shell && activeTab === 'home'">
+    <template v-if="shell">
       <slot />
     </template>
     <template v-else>
@@ -44,8 +44,6 @@ import EmptyState from '@/components/common/EmptyState.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import Loading from '@/components/common/Loading.vue'
 import NavBar from '@/components/common/NavBar.vue'
-import { pageRegistry } from '@/data/pageRegistry.js'
-import { useAppStore } from '@/store/app.js'
 
 const props = defineProps({
   shell: {
@@ -62,20 +60,8 @@ const props = defineProps({
   },
 })
 
-const appStore = useAppStore()
 const state = ref('ready')
-const activeTab = computed(() => appStore.activeTab)
-const tabMeta = {
-  advisor: pageRegistry.digitalHuman,
-  job: pageRegistry.jobList,
-  growth: pageRegistry.careerRoadmap,
-  profile: pageRegistry.profile,
-}
-const currentMeta = computed(() => {
-  if (!props.shell) return props.meta
-
-  return tabMeta[activeTab.value] || props.meta
-})
+const currentMeta = computed(() => props.meta)
 </script>
 <style lang="scss" scoped>
 .default-layout {

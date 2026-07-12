@@ -6,7 +6,7 @@
     </view>
     <view class="app-tabbar-item" :class="{ active: advisorActive }" @tap="goAdvisor">
       <view class="tabbar-icon tab-advisor"></view>
-      <text>AI顾问</text>
+      <text>数字人</text>
     </view>
     <view class="app-tabbar-item" :class="{ active: jobActive }" @tap="goJob">
       <view class="tabbar-icon tab-job"></view>
@@ -35,6 +35,13 @@ let routeTimer = null
 const appStore = useAppStore()
 
 const hiddenRoutePrefixes = ['pages/login', 'pages/common']
+const tabRoutes = {
+  home: '/pages/index/index',
+  advisor: '/pages/digital-human/index',
+  job: '/pages/job/list',
+  growth: '/pages/career/roadmap',
+  profile: '/pages/profile/index',
+}
 
 const visible = computed(
   () => !hiddenRoutePrefixes.some((prefix) => currentRoute.value.startsWith(prefix))
@@ -84,17 +91,12 @@ function syncCurrentRoute() {
 }
 
 function goRoute(key) {
-  if (activeKey.value === key || isTransitioning.value) return
+  const targetUrl = tabRoutes[key]
+  if (!targetUrl || isTransitioning.value || currentRoute.value === targetUrl.slice(1)) return
 
   isTransitioning.value = true
   appStore.setActiveTab(key)
-
-  if (currentRoute.value === 'pages/index/index') {
-    isTransitioning.value = false
-    return
-  }
-
-  reLaunch(`/pages/index/index?tab=${key}`)
+  reLaunch(targetUrl)
 }
 
 function goHome() {

@@ -1,11 +1,8 @@
 # AGENTS.md
 
 # Project Instructions
-
 ## 一、项目架构原则
-
 ### （一）分层架构
-
 ```
 Page → Composable → Service → API
                   │
@@ -32,13 +29,10 @@ Page → Composable → Service → API
 4. API 不允许调用 Page、Composable、Store。
 5. 页面之间禁止相互调用。
 6. 禁止跨层引用。
-
 ---
 
 ## 二、项目开发规范
-
 ### （一）目录规范
-
 1. 公共业务逻辑统一放入 `composables/`。
 2. 公共 UI 统一放入 `components/`。
 3. 所有 HTTP 请求统一放入 `api/`。
@@ -103,6 +97,8 @@ Vue
 9. 不允许修改接口返回结构适配业务，接口适配统一在 Service 层完成。
 10. 每个开发阶段结束后必须执行 Lint、Build，确保项目可以正常运行。
 
+### （四） UI 样式 要严格使用`spec\ui'
+
 ---
 
 ## 三、组件与代码规范
@@ -166,11 +162,9 @@ PRD
 ```bash
 pnpm docs:tree
 ```
-
 重新生成项目目录树。
 
 3. `README.md` 中 `PROJECT_TREE_START` 与 `PROJECT_TREE_END` 之间的内容必须保持最新，不允许手动修改，由 `scripts/update-readme-tree.mjs` 自动生成。
-
 ---
 
 ### （二）更新日志
