@@ -1,9 +1,5 @@
 <template>
-  <view class="digital-human-avatar">
-    <view class="avatar-rings">
-      <view class="avatar-ring avatar-ring-outer"></view>
-      <view class="avatar-ring avatar-ring-inner"></view>
-    </view>
+  <view class="digital-human-avatar" :style="avatarStyle">
     <image
       class="avatar-image"
       src="/static/images/ai-assistant-reference.png"
@@ -12,12 +8,28 @@
   </view>
 </template>
 
+<script setup>
+import { computed } from 'vue'
+
+const props = defineProps({
+  width: {
+    type: String,
+    default: '100%',
+  },
+  height: {
+    type: String,
+    default: '100%',
+  },
+})
+
+const avatarStyle = computed(() => `width: ${props.width}; height: ${props.height};`)
+</script>
+
 <style lang="scss" scoped>
 .digital-human-avatar {
-  position: absolute;
-  right: -28rpx;
-  bottom: -10rpx;
-  width: 392rpx;
+  position: relative;
+  display: block;
+  width: 350rpx;
   height: 520rpx;
   overflow: hidden;
 }
@@ -33,41 +45,11 @@
   content: '';
 }
 
-.avatar-rings {
-  position: absolute;
-  right: 12rpx;
-  bottom: 90rpx;
-  width: 320rpx;
-  height: 320rpx;
-}
-
-.avatar-ring {
-  position: absolute;
-  border: 2rpx solid rgba(124, 92, 255, 0.34);
-  border-radius: 50%;
-}
-
-.avatar-ring-outer {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.avatar-ring-inner {
-  top: 54rpx;
-  right: 54rpx;
-  bottom: 54rpx;
-  left: 54rpx;
-  border-color: rgba(124, 92, 255, 0.18);
-}
-
 .avatar-image {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 1;
-  width: 350rpx;
-  height: 520rpx;
+  width: 100%;
+  height: 100%;
 }
 </style>

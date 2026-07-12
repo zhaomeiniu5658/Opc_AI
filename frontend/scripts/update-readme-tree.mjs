@@ -172,7 +172,7 @@ function describeFile(relativePath) {
 
   if (normalized.startsWith('src/layouts/')) {
     const descriptions = {
-      'DefaultLayout.vue': 'Default page layout',
+      'DefaultLayout.vue': '唯一页面公共布局',
     }
     return descriptions[fileName] || 'Page layout'
   }
@@ -181,6 +181,10 @@ function describeFile(relativePath) {
 
   if (normalized.startsWith('src/components/business/')) {
     const descriptions = {
+      'DigitalHumanTabContent.vue': '数字人一级菜单内容视图',
+      'HomeTabContent.vue': '首页一级菜单内容视图',
+      'JobTabContent.vue': '岗位一级菜单内容视图',
+      'TabSummaryContent.vue': '成长与我的一级菜单摘要视图',
       'CareerTag.vue': '职业标签组件',
       'JobCard.vue': '岗位卡片组件',
       'MatchScore.vue': '匹配得分组件',

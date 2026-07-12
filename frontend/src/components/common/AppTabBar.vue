@@ -1,22 +1,22 @@
 <template>
-  <view v-if="visible" class="app-tabbar">
-    <view class="app-tabbar-item" :class="{ active: homeActive }" @tap="goHome">
+  <view class="app-tabbar">
+    <view class="app-tabbar-item" :class="{ active: activeKey === 'home' }" @tap="select('home')">
       <view class="tabbar-icon tab-home"></view>
       <text>首页</text>
     </view>
-    <view class="app-tabbar-item" :class="{ active: advisorActive }" @tap="goAdvisor">
+    <view class="app-tabbar-item" :class="{ active: activeKey === 'advisor' }" @tap="select('advisor')">
       <view class="tabbar-icon tab-advisor"></view>
       <text>数字人</text>
     </view>
-    <view class="app-tabbar-item" :class="{ active: jobActive }" @tap="goJob">
+    <view class="app-tabbar-item" :class="{ active: activeKey === 'job' }" @tap="select('job')">
       <view class="tabbar-icon tab-job"></view>
       <text>岗位</text>
     </view>
-    <view class="app-tabbar-item" :class="{ active: growthActive }" @tap="goGrowth">
+    <view class="app-tabbar-item" :class="{ active: activeKey === 'growth' }" @tap="select('growth')">
       <view class="tabbar-icon tab-growth"></view>
       <text>成长</text>
     </view>
-    <view class="app-tabbar-item" :class="{ active: profileActive }" @tap="goProfile">
+    <view class="app-tabbar-item" :class="{ active: activeKey === 'profile' }" @tap="select('profile')">
       <view class="tabbar-icon tab-profile"></view>
       <text>我的</text>
     </view>
@@ -24,115 +24,20 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-
-import { useAppStore } from '@/store/app.js'
-import { reLaunch } from '@/utils/navigation.js'
-
-const currentRoute = ref('')
-const isTransitioning = ref(false)
-let routeTimer = null
-const appStore = useAppStore()
-
-const hiddenRoutePrefixes = ['pages/login', 'pages/common']
-const tabRoutes = {
-  home: '/pages/index/index',
-  advisor: '/pages/digital-human/index',
-  job: '/pages/job/list',
-  growth: '/pages/career/roadmap',
-  profile: '/pages/profile/index',
-}
-
-const visible = computed(
-  () => !hiddenRoutePrefixes.some((prefix) => currentRoute.value.startsWith(prefix))
-)
-
-const activeKey = computed(() => {
-  const route = currentRoute.value
-  if (route === 'pages/index/index') return appStore.activeTab
-  if (route.startsWith('pages/job')) return 'job'
-  if (route.startsWith('pages/career') || route.startsWith('pages/graph')) return 'growth'
-  if (
-    route.startsWith('pages/resume') ||
-    route.startsWith('pages/recommendation') ||
-    route.startsWith('pages/interview') ||
-    route.startsWith('pages/digital-human')
-  ) {
-    return 'advisor'
-  }
-  if (
-    route.startsWith('pages/profile') ||
-    route.startsWith('pages/membership') ||
-    route.startsWith('pages/message')
-  )
-    return 'profile'
-
-  return 'home'
+const props = defineProps({
+  activeKey: {
+    type: String,
+    default: 'home',
+  },
 })
 
-const homeActive = computed(() => activeKey.value === 'home')
-const advisorActive = computed(() => activeKey.value === 'advisor')
-const jobActive = computed(() => activeKey.value === 'job')
-const growthActive = computed(() => activeKey.value === 'growth')
-const profileActive = computed(() => activeKey.value === 'profile')
+const emit = defineEmits(['change'])
 
-function readCurrentRoute() {
-  if (typeof getCurrentPages !== 'function') return 'pages/index/index'
-
-  const pages = getCurrentPages()
-  return pages[pages.length - 1]?.route || 'pages/index/index'
-}
-
-function syncCurrentRoute() {
-  const route = readCurrentRoute()
-  if (route !== currentRoute.value) {
-    currentRoute.value = route
+function select(key) {
+  if (key !== props.activeKey) {
+    emit('change', key)
   }
 }
-
-function goRoute(key) {
-  const targetUrl = tabRoutes[key]
-  if (!targetUrl || isTransitioning.value || currentRoute.value === targetUrl.slice(1)) return
-
-  isTransitioning.value = true
-  appStore.setActiveTab(key)
-  reLaunch(targetUrl)
-}
-
-function goHome() {
-  goRoute('home')
-}
-
-function goAdvisor() {
-  goRoute('advisor')
-}
-
-function goJob() {
-  goRoute('job')
-}
-
-function goGrowth() {
-  goRoute('growth')
-}
-
-function goProfile() {
-  goRoute('profile')
-}
-
-syncCurrentRoute()
-
-onMounted(() => {
-  syncCurrentRoute()
-  isTransitioning.value = false
-  routeTimer = globalThis.setInterval(syncCurrentRoute, 200)
-})
-
-onUnmounted(() => {
-  if (routeTimer) {
-    globalThis.clearInterval(routeTimer)
-    routeTimer = null
-  }
-})
 </script>
 
 <style lang="scss">

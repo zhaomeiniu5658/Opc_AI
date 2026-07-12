@@ -43,6 +43,20 @@ pnpm build:mp-weixin
 - VITE_USE_MOCK：是否使用 Mock 数据，默认 true
 - VITE_DH_ENABLED：数字人入口默认开关，默认 false
 
+## 底部导航
+
+底部导航只由 `src/components/common/AppTabBar.vue` 实现，并仅在 `src/layouts/DefaultLayout.vue` 挂载。五个一级菜单由同一个 `DefaultLayout` 页面壳承载；点击菜单仅派发 `change` 事件，布局通过条件分支替换当前内容视图并更新选中态，不执行 `navigateTo`、`navigateBack` 或 `reLaunch`。
+
+| 菜单 | 直接入口路由 | 内容视图 | 页面样式来源 |
+| --- | --- | --- | --- |
+| 首页 | `/pages/index/index` | `src/components/business/HomeTabContent.vue` | 首页内容视图的 scoped 样式；数字人形象来自 `components/digital-human/DigitalHumanAvatar.vue` |
+| 数字人 | `/pages/digital-human/index` | `src/components/business/DigitalHumanTabContent.vue` | 数字人内容视图的 scoped 样式与共享数字人组件 |
+| 岗位 | `/pages/job/list` | `src/components/business/JobTabContent.vue` | 岗位内容视图的 scoped 样式 |
+| 成长 | `/pages/career/roadmap` | `src/components/business/TabSummaryContent.vue` | `TabSummaryContent.vue` 与 `pageRegistry.careerRoadmap` |
+| 我的 | `/pages/profile/index` | `src/components/business/TabSummaryContent.vue` | `TabSummaryContent.vue` 与 `pageRegistry.profile` |
+
+导航按钮、图标、选中态与固定底栏样式全部位于 `src/components/common/AppTabBar.vue`；一级内容由壳内条件分支替换，切换时不会重建底栏或原生页面。
+
 ## 项目目录
 
 目录结构由 `pnpm docs:tree` 自动生成。新增、删除或移动目录/关键文件后，先运行该命令再提交 README。
@@ -102,7 +116,10 @@ frontend/
     |   |   `-- user.js - 文件
     |   |-- components/
     |   |   |-- business/
-    |   |   |   `-- .keep - 占位文件
+    |   |   |   |-- DigitalHumanTabContent.vue - 数字人一级菜单内容视图
+    |   |   |   |-- HomeTabContent.vue - 首页一级菜单内容视图
+    |   |   |   |-- JobTabContent.vue - 岗位一级菜单内容视图
+    |   |   |   `-- TabSummaryContent.vue - 成长与我的一级菜单摘要视图
     |   |   |-- charts/
     |   |   |   `-- .keep - 占位文件
     |   |   |-- common/
@@ -112,7 +129,9 @@ frontend/
     |   |   |   |-- Loading.vue - 加载中组件
     |   |   |   `-- NavBar.vue - 通用顶部导航
     |   |   |-- digital-human/
-    |   |   |   `-- .keep - 占位文件
+    |   |   |   |-- .keep - 占位文件
+    |   |   |   |-- DigitalHumanAvatar.test.js - 测试文件
+    |   |   |   `-- DigitalHumanAvatar.vue - 数字人组件
     |   |   `-- graph/
     |   |       `-- .keep - 占位文件
     |   |-- composables/
@@ -137,57 +156,33 @@ frontend/
     |   |   |-- app.js - 应用常量
     |   |   |-- cache.js - 缓存常量
     |   |   |-- index.js - 常量聚合入口
-    |   |   |-- routes.js - 路由常量
     |   |   `-- status.js - 状态常量
     |   |-- data/
     |   |   `-- pageRegistry.js - 页面元数据注册表
     |   |-- layouts/
-    |   |   `-- DefaultLayout.vue - Default page layout
+    |   |   |-- DefaultLayout.test.js - 测试文件
+    |   |   `-- DefaultLayout.vue - 唯一页面公共布局
     |   |-- models/
     |   |   `-- .keep - 占位文件
     |   |-- pages/
     |   |   |-- career/
-    |   |   |   |-- profile.vue - 职业画像页
-    |   |   |   |-- report.vue - 职业报告页
     |   |   |   `-- roadmap.vue - 职业路线页
-    |   |   |-- common/
-    |   |   |   |-- empty.vue - 通用空状态页
-    |   |   |   |-- error.vue - 通用错误页
-    |   |   |   `-- webview.vue - 通用WebView
     |   |   |-- digital-human/
     |   |   |   `-- index.vue - AI 数字人页
-    |   |   |-- graph/
-    |   |   |   |-- company.vue - 图谱企业详情页
-    |   |   |   |-- network.vue - 图谱行业网络页
-    |   |   |   `-- relationship.vue - 图谱relationship页
     |   |   |-- index/
     |   |   |   |-- index.test.js - 首页测试文件
     |   |   |   `-- index.vue - 首页主界面
     |   |   |-- interview/
-    |   |   |   |-- history.vue - 面试历史页
-    |   |   |   |-- mock.vue - 面试模拟面试页
-    |   |   |   `-- result.vue - 面试结果页
+    |   |   |   `-- mock.vue - 面试模拟面试页
     |   |   |-- job/
-    |   |   |   |-- company.vue - 岗位企业详情页
     |   |   |   |-- detail.vue - 岗位详情页
-    |   |   |   |-- list.vue - 岗位列表页
-    |   |   |   `-- search.vue - 岗位搜索页
+    |   |   |   `-- list.vue - 岗位列表页
     |   |   |-- login/
-    |   |   |   |-- agreement.vue - 登录协议页
     |   |   |   `-- login.vue - 登录登录页页
     |   |   |-- membership/
-    |   |   |   |-- benefit.vue - 会员benefit页
-    |   |   |   |-- index.vue - 会员主界面页
-    |   |   |   `-- order.vue - 会员订单页
-    |   |   |-- message/
-    |   |   |   |-- detail.vue - 消息详情页
-    |   |   |   `-- index.vue - 消息主界面页
+    |   |   |   `-- index.vue - 会员主界面页
     |   |   |-- profile/
-    |   |   |   |-- about.vue - 我的关于页
-    |   |   |   |-- feedback.vue - 我的反馈页
-    |   |   |   |-- index.vue - 我的主界面页
-    |   |   |   |-- security.vue - 我的安全页
-    |   |   |   `-- settings.vue - 我的设置页
+    |   |   |   `-- index.vue - 我的主界面页
     |   |   |-- recommendation/
     |   |   |   |-- index.vue - AI 推荐页
     |   |   |   `-- report.vue - 推荐报告页

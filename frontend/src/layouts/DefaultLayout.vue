@@ -1,17 +1,25 @@
-﻿<template>
+<template>
   <view class="default-layout">
     <template v-if="shell">
-      <slot />
+      <view class="tab-shell">
+        <HomeTabContent v-if="activeTab === 'home'" />
+        <DigitalHumanTabContent v-else-if="activeTab === 'advisor'" />
+        <JobTabContent v-else-if="activeTab === 'job'" />
+        <TabSummaryContent v-else-if="activeTab === 'growth'" :meta="growthMeta" />
+        <TabSummaryContent v-else :meta="profileMeta" />
+      </view>
+      <AppTabBar :active-key="activeTab" @change="selectTab" />
     </template>
+
     <template v-else>
       <view class="app-page default-layout-page">
         <scroll-view class="default-layout-scroll" scroll-y :show-scrollbar="false">
-          <NavBar :title="currentMeta.title" :subtitle="currentMeta.description" />
+          <NavBar :title="props.meta.title" :subtitle="props.meta.description" />
           <view class="layout-panel panel fade-in">
             <view class="layout-head">
               <view>
-                <text class="layout-title">{{ currentMeta.title }}</text>
-                <text class="layout-desc">{{ currentMeta.description }}</text>
+                <text class="layout-title">{{ props.meta.title }}</text>
+                <text class="layout-desc">{{ props.meta.description }}</text>
               </view>
               <text class="layout-badge">Mock</text>
             </view>
@@ -20,11 +28,11 @@
             <EmptyState
               v-else-if="state === 'empty'"
               title="当前暂无数据"
-              :description="currentMeta.description"
+              :description="props.meta.description"
             />
             <ErrorState v-else-if="state === 'error'" />
             <view v-else class="layout-body">
-              <view v-for="item in currentMeta.stats" :key="item" class="stat-item">
+              <view v-for="item in props.meta.stats" :key="item" class="stat-item">
                 <text>{{ item }}</text>
               </view>
             </view>
@@ -32,23 +40,33 @@
         </scroll-view>
       </view>
     </template>
-    <AppTabBar />
   </view>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
+import DigitalHumanTabContent from '@/components/business/DigitalHumanTabContent.vue'
+import HomeTabContent from '@/components/business/HomeTabContent.vue'
+import JobTabContent from '@/components/business/JobTabContent.vue'
+import TabSummaryContent from '@/components/business/TabSummaryContent.vue'
 import AppTabBar from '@/components/common/AppTabBar.vue'
 import EmptyState from '@/components/common/EmptyState.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import Loading from '@/components/common/Loading.vue'
 import NavBar from '@/components/common/NavBar.vue'
+import { pageRegistry } from '@/data/pageRegistry.js'
+
+const tabKeys = ['home', 'advisor', 'job', 'growth', 'profile']
 
 const props = defineProps({
   shell: {
     type: Boolean,
     default: false,
+  },
+  initialTab: {
+    type: String,
+    default: 'home',
   },
   meta: {
     type: Object,
@@ -61,10 +79,29 @@ const props = defineProps({
 })
 
 const state = ref('ready')
-const currentMeta = computed(() => props.meta)
+const activeTab = ref(normalizeTab(props.initialTab))
+const growthMeta = computed(() => pageRegistry.careerRoadmap)
+const profileMeta = computed(() => pageRegistry.profile)
+
+watch(
+  () => props.initialTab,
+  (tab) => {
+    activeTab.value = normalizeTab(tab)
+  }
+)
+
+function normalizeTab(tab) {
+  return tabKeys.includes(tab) ? tab : 'home'
+}
+
+function selectTab(tab) {
+  activeTab.value = normalizeTab(tab)
+}
 </script>
+
 <style lang="scss" scoped>
-.default-layout {
+.default-layout,
+.tab-shell {
   width: 100%;
   min-height: 100vh;
   background: #07111f;

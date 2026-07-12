@@ -1,9 +1,10 @@
-﻿<template>
-  <default-layout :meta="pageMeta" />
+<template>
+  <default-layout shell initial-tab="growth" />
 </template>
 
-<script setup>
-import { usePageMeta } from '@/composables/usePageMeta.js'
-
-const { pageMeta } = usePageMeta('careerRoadmap')
-</script>
+<style lang="scss">
+page {
+  min-height: 100vh;
+  background: #07111f;
+}
+</style>
