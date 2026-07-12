@@ -247,7 +247,7 @@ function getPrimaryTag(job) {
   overflow: hidden;
   width: 100%;
   min-height: 100vh;
-  padding: calc(24rpx + var(--status-bar-height, 0px)) 28rpx 0;
+  padding: calc(121rpx + var(--status-bar-height, 0px)) 28rpx 0;
   box-sizing: border-box;
   background:
     linear-gradient(130deg, rgba(117, 92, 255, 0.12) 0%, rgba(4, 10, 24, 0) 32%),

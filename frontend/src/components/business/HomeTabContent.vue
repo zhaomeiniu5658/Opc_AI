@@ -1,24 +1,7 @@
 <template>
   <view class="app-page home-page">
     <scroll-view class="home-scroll" scroll-y :show-scrollbar="false">
-      <view class="phone-status">
-        <text class="status-time">9:41</text>
-        <view class="status-icons">
-          <view class="signal-bars">
-            <view class="signal-bar short"></view>
-            <view class="signal-bar mid"></view>
-            <view class="signal-bar tall"></view>
-          </view>
-          <view class="wifi-mark">
-            <view class="wifi-arc arc-one"></view>
-            <view class="wifi-arc arc-two"></view>
-            <view class="wifi-dot"></view>
-          </view>
-          <view class="battery">
-            <view class="battery-level"></view>
-          </view>
-        </view>
-      </view>
+      <view class="home-top-spacer"></view>
 
       <view class="top-bar">
         <view class="brand">
@@ -27,15 +10,7 @@
             <view class="cube-face left"></view>
             <view class="cube-face right"></view>
           </view>
-          <text class="brand-name">AI数字人求职助手</text>
-        </view>
-        <view class="resume-button" @tap="go('/pages/resume/upload')">
-          <view class="resume-button-icon">
-            <view class="icon-doc-line long"></view>
-            <view class="icon-doc-line"></view>
-            <view class="icon-user-dot"></view>
-          </view>
-          <text>我的简历</text>
+          <text class="brand-name">数字人求职顾问</text>
         </view>
       </view>
 
@@ -54,7 +29,7 @@
         </view>
 
         <view class="home-avatar-stage">
-          <DigitalHumanAvatar width="392rpx" height="572rpx" />
+          <DigitalHumanAvatar />
         </view>
       </view>
 
@@ -259,7 +234,7 @@ onMounted(() => {
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0));
 }
 
-.phone-status,
+.home-top-spacer,
 .top-bar,
 .ai-hero,
 .assistant-message,
@@ -271,116 +246,8 @@ onMounted(() => {
   z-index: 1;
 }
 
-.phone-status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.home-top-spacer {
   min-height: 56rpx;
-  padding: 0 18rpx;
-  color: #ffffff;
-}
-
-.status-time {
-  font-size: 30rpx;
-  font-weight: 800;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-  gap: 16rpx;
-}
-
-.signal-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 5rpx;
-  height: 24rpx;
-}
-
-.signal-bar {
-  width: 7rpx;
-  border-radius: 999px;
-  background: #ffffff;
-}
-
-.signal-bar.short {
-  height: 10rpx;
-}
-
-.signal-bar.mid {
-  height: 16rpx;
-}
-
-.signal-bar.tall {
-  height: 22rpx;
-}
-
-.wifi-mark {
-  position: relative;
-  width: 34rpx;
-  height: 24rpx;
-}
-
-.wifi-arc {
-  position: absolute;
-  left: 50%;
-  border: 5rpx solid #ffffff;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  border-radius: 50%;
-  transform: translateX(-50%);
-}
-
-.wifi-arc.arc-one {
-  top: 0;
-  width: 34rpx;
-  height: 26rpx;
-}
-
-.wifi-arc.arc-two {
-  top: 8rpx;
-  width: 22rpx;
-  height: 16rpx;
-}
-
-.wifi-dot {
-  position: absolute;
-  bottom: 1rpx;
-  left: 50%;
-  width: 7rpx;
-  height: 7rpx;
-  border-radius: 50%;
-  background: #ffffff;
-  transform: translateX(-50%);
-}
-
-.battery {
-  position: relative;
-  width: 42rpx;
-  height: 22rpx;
-  padding: 3rpx;
-  border: 3rpx solid rgba(255, 255, 255, 0.88);
-  border-radius: 6rpx;
-}
-
-.battery::after {
-  position: absolute;
-  top: 5rpx;
-  right: -7rpx;
-  width: 4rpx;
-  height: 10rpx;
-  border-radius: 0 4rpx 4rpx 0;
-  background: rgba(255, 255, 255, 0.88);
-  content: '';
-}
-
-.battery-level {
-  width: 100%;
-  height: 100%;
-  border-radius: 3rpx;
-  background: #ffffff;
 }
 
 .top-bar {
@@ -453,60 +320,6 @@ onMounted(() => {
   line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.resume-button {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10rpx;
-  min-height: 58rpx;
-  padding: 0 18rpx;
-  border: 1px solid rgba(148, 163, 255, 0.34);
-  border-radius: 18rpx;
-  background: rgba(20, 30, 58, 0.78);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  color: #eef2ff;
-  font-size: 22rpx;
-  font-weight: 800;
-}
-
-.resume-button-icon {
-  position: relative;
-  width: 26rpx;
-  height: 28rpx;
-  border: 3rpx solid #a99cff;
-  border-radius: 5rpx;
-}
-
-.icon-doc-line {
-  position: absolute;
-  left: 5rpx;
-  width: 12rpx;
-  height: 3rpx;
-  border-radius: 999px;
-  background: #a99cff;
-}
-
-.icon-doc-line.long {
-  top: 6rpx;
-  width: 14rpx;
-}
-
-.icon-doc-line:not(.long) {
-  top: 14rpx;
-}
-
-.icon-user-dot {
-  position: absolute;
-  right: -9rpx;
-  bottom: -6rpx;
-  width: 12rpx;
-  height: 12rpx;
-  border: 3rpx solid #a99cff;
-  border-radius: 50%;
-  background: #172344;
 }
 
 .ai-hero {
@@ -585,7 +398,7 @@ onMounted(() => {
 .home-avatar-stage {
   position: absolute;
   right: -28rpx;
-  bottom: -10rpx;
+  bottom: 13rpx;
   width: 392rpx;
   height: 572rpx;
 }

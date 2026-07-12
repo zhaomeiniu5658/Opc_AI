@@ -3,7 +3,6 @@
     <scroll-view class="digital-scroll" scroll-y :show-scrollbar="false">
       <view class="digital-header">
         <view>
-          <text class="digital-eyebrow">求职数字人</text>
           <view class="digital-title-row">
             <text class="digital-title">小澜</text>
             <view class="digital-online">
@@ -13,9 +12,10 @@
           </view>
           <text class="digital-subtitle">你的专属求职顾问</text>
         </view>
-        <view class="digital-call-trigger" @tap="startCall">
-          <view class="digital-call-icon"></view>
-          <text>拨打电话</text>
+        <view class="digital-call-trigger" hover-class="digital-call-trigger-hover" @tap="startCall">
+          <view class="digital-call-icon">
+            <view class="digital-call-receiver"></view>
+          </view>
         </view>
       </view>
 
@@ -30,7 +30,7 @@
           </view>
         </view>
         <view class="digital-avatar-stage">
-          <DigitalHumanAvatar width="350rpx" height="520rpx" />
+          <DigitalHumanAvatar />
         </view>
       </view>
 
@@ -56,7 +56,9 @@
       <view class="conversation-composer">
         <view v-if="inputMode === 'text'" class="composer-row">
           <view class="composer-mode" @tap="toggleInputMode">
-            <text>语音</text>
+            <view class="composer-mic-icon">
+              <view class="composer-mic-stand"></view>
+            </view>
           </view>
           <input
             v-model="draft"
@@ -67,7 +69,7 @@
             @confirm="sendMessage"
           />
           <view class="composer-send" :class="{ 'composer-send-ready': canSend }" @tap="sendMessage">
-            <text>发送</text>
+            <view class="composer-send-icon"></view>
           </view>
         </view>
         <view v-else class="composer-row">
@@ -84,9 +86,6 @@
             <text>{{ isRecording ? '正在录音，松开发送' : '按住说话' }}</text>
           </view>
         </view>
-        <text class="composer-hint">
-          {{ inputMode === 'text' ? '支持文字输入和语音输入' : '松开后将语音消息发送给小澜' }}
-        </text>
       </view>
     </scroll-view>
 
@@ -96,7 +95,7 @@
       </view>
       <view class="call-content">
         <view class="call-avatar-stage">
-          <DigitalHumanAvatar width="300rpx" height="300rpx" />
+          <DigitalHumanAvatar />
         </view>
         <text class="call-name">小澜</text>
         <text class="call-status">正在与数字人通话</text>
@@ -254,7 +253,7 @@ function showToast(title) {
   box-sizing: border-box;
   width: 100%;
   min-height: 100vh;
-  padding: calc(24rpx + var(--status-bar-height, 0px)) 24rpx 0;
+  padding: calc(117rpx + var(--status-bar-height, 0px)) 24rpx 0;
   background:
     linear-gradient(130deg, rgba(117, 92, 255, 0.12) 0%, rgba(4, 10, 24, 0) 32%),
     linear-gradient(180deg, #020816 0%, #06152a 48%, #020817 100%);
@@ -274,19 +273,11 @@ function showToast(title) {
   gap: 18rpx;
 }
 
-.digital-eyebrow,
 .digital-subtitle,
 .digital-hero-label,
 .digital-hero-title,
-.composer-hint,
 .call-status {
   display: block;
-}
-
-.digital-eyebrow {
-  color: #a99cff;
-  font-size: 22rpx;
-  font-weight: 800;
 }
 
 .digital-title-row {
@@ -334,27 +325,57 @@ function showToast(title) {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8rpx;
-  min-height: 58rpx;
+  width: 58rpx;
+  height: 58rpx;
   margin-top: 18rpx;
-  padding: 0 16rpx;
   border: 1px solid rgba(169, 156, 255, 0.38);
-  border-radius: 14rpx;
+  border-radius: 50%;
   background: rgba(20, 30, 58, 0.82);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   color: #eef2ff;
-  font-size: 21rpx;
-  font-weight: 800;
+}
+
+.digital-call-trigger-hover {
+  opacity: 0.78;
 }
 
 .digital-call-icon {
-  width: 18rpx;
-  height: 28rpx;
-  border: 4rpx solid currentColor;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 9rpx;
+  position: relative;
+  width: 32rpx;
+  height: 32rpx;
+  color: currentColor;
   transform: rotate(-42deg);
+}
+
+.digital-call-receiver {
+  position: absolute;
+  top: 6rpx;
+  left: 10rpx;
+  width: 12rpx;
+  height: 20rpx;
+  border-right: 5rpx solid currentColor;
+  border-left: 5rpx solid currentColor;
+  border-radius: 10rpx;
+}
+
+.digital-call-receiver::before,
+.digital-call-receiver::after {
+  position: absolute;
+  width: 15rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  background: currentColor;
+  content: '';
+}
+
+.digital-call-receiver::before {
+  top: -5rpx;
+  left: -7rpx;
+}
+
+.digital-call-receiver::after {
+  right: -7rpx;
+  bottom: -5rpx;
 }
 
 .digital-hero {
@@ -501,6 +522,56 @@ function showToast(title) {
   color: #d9d3ff;
 }
 
+.composer-mic-icon {
+  position: relative;
+  width: 30rpx;
+  height: 34rpx;
+}
+
+.composer-mic-icon::before {
+  position: absolute;
+  top: 1rpx;
+  left: 8rpx;
+  width: 10rpx;
+  height: 18rpx;
+  border: 3rpx solid currentColor;
+  border-radius: 10rpx;
+  content: '';
+}
+
+.composer-mic-icon::after {
+  position: absolute;
+  top: 10rpx;
+  left: 4rpx;
+  width: 18rpx;
+  height: 12rpx;
+  border: 3rpx solid currentColor;
+  border-top: 0;
+  border-radius: 0 0 12rpx 12rpx;
+  content: '';
+}
+
+.composer-mic-stand {
+  position: absolute;
+  bottom: 1rpx;
+  left: 14rpx;
+  width: 3rpx;
+  height: 8rpx;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.composer-mic-stand::after {
+  position: absolute;
+  bottom: 0;
+  left: -5rpx;
+  width: 13rpx;
+  height: 3rpx;
+  border-radius: 999px;
+  background: currentColor;
+  content: '';
+}
+
 .composer-input {
   flex: 1;
   min-width: 0;
@@ -514,6 +585,15 @@ function showToast(title) {
   padding: 0 14rpx;
   background: rgba(65, 82, 116, 0.74);
   color: #9fb1c8;
+}
+
+.composer-send-icon {
+  width: 0;
+  height: 0;
+  border-top: 13rpx solid transparent;
+  border-bottom: 13rpx solid transparent;
+  border-left: 28rpx solid currentColor;
+  transform: rotate(-34deg);
 }
 
 .composer-send-ready {
@@ -537,13 +617,6 @@ function showToast(title) {
 .hold-to-talk-recording {
   background: rgba(15, 118, 110, 0.56);
   color: #e4fff8;
-}
-
-.composer-hint {
-  margin-top: 10rpx;
-  padding-left: 8rpx;
-  color: #8ca2be;
-  font-size: 19rpx;
 }
 
 .call-overlay {

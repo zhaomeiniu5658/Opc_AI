@@ -14,6 +14,14 @@ const jobContentSource = readFileSync(
   resolve(currentDirectory, '../components/business/JobTabContent.vue'),
   'utf8'
 )
+const digitalHumanContentSource = readFileSync(
+  resolve(currentDirectory, '../components/business/DigitalHumanTabContent.vue'),
+  'utf8'
+)
+const summaryContentSource = readFileSync(
+  resolve(currentDirectory, '../components/business/TabSummaryContent.vue'),
+  'utf8'
+)
 const pagesConfig = JSON.parse(readFileSync(resolve(currentDirectory, '../pages.json'), 'utf8'))
 const primaryEntrySources = [
   '../pages/index/index.vue',
@@ -71,5 +79,18 @@ describe('persistent bottom navigation', () => {
     expect(jobContentSource).not.toContain('#2dd4bf')
     expect(jobContentSource).toContain('#8f7cff')
     expect(jobContentSource).toContain('#9b7cff')
+  })
+
+  it('aligns the first visible control in every non-home tab with the home brand', () => {
+    expect(digitalHumanContentSource).toContain(
+      'padding: calc(117rpx + var(--status-bar-height, 0px)) 24rpx 0'
+    )
+    expect(digitalHumanContentSource).toContain('margin-top: 4rpx')
+    expect(jobContentSource).toContain(
+      'padding: calc(121rpx + var(--status-bar-height, 0px)) 28rpx 0'
+    )
+    expect(summaryContentSource).toContain(
+      'padding: calc(121rpx + var(--status-bar-height, 0px)) 28rpx 0'
+    )
   })
 })

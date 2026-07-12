@@ -1,5 +1,5 @@
 <template>
-  <view class="digital-human-avatar" :style="avatarStyle">
+  <view class="digital-human-avatar">
     <image
       class="avatar-image"
       src="/static/images/ai-assistant-reference.png"
@@ -8,29 +8,12 @@
   </view>
 </template>
 
-<script setup>
-import { computed } from 'vue'
-
-const props = defineProps({
-  width: {
-    type: String,
-    default: '100%',
-  },
-  height: {
-    type: String,
-    default: '100%',
-  },
-})
-
-const avatarStyle = computed(() => `width: ${props.width}; height: ${props.height};`)
-</script>
-
 <style lang="scss" scoped>
 .digital-human-avatar {
   position: relative;
   display: block;
-  width: 350rpx;
-  height: 520rpx;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 

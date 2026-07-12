@@ -65,6 +65,7 @@ export const pageRegistry = {
     stats: ['Mock 数据', '权限控制', '三态展示'],
   },
   profile: {
+    kind: 'profile',
     title: '我的',
     description: '展示账号、职业数据和常用入口。',
     stats: ['Mock 数据', '权限控制', '三态展示'],

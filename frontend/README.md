@@ -119,6 +119,7 @@ frontend/
     |   |   |   |-- DigitalHumanTabContent.vue - 数字人一级菜单内容视图
     |   |   |   |-- HomeTabContent.vue - 首页一级菜单内容视图
     |   |   |   |-- JobTabContent.vue - 岗位一级菜单内容视图
+    |   |   |   |-- TabSummaryContent.test.js - 测试文件
     |   |   |   `-- TabSummaryContent.vue - 成长与我的一级菜单摘要视图
     |   |   |-- charts/
     |   |   |   `-- .keep - 占位文件

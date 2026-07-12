@@ -1,5 +1,12 @@
 ﻿## 导航统一修复
 
+- 2026-07-12: Renamed the home brand to 数字人求职顾问 and moved the home digital-human stage upward so its top aligns with the brand text top.
+- 2026-07-12: Aligned the first visible control in the digital-human, job, growth, and profile tabs to `calc(121rpx + var(--status-bar-height))` from the page top.
+- 2026-07-12: Replaced the digital-human page's call, voice-input, and send labels with static phone, microphone, and send-arrow icons without adding icon-font loading.
+- 2026-07-12: Removed the home header's 我的简历 action and aligned the home digital-human stage top with the left-side hero copy without moving the rest of the content.
+- 2026-07-12: Replaced the digital-human header's call text with a same-position telephone icon, removed the 求职数字人 eyebrow and composer input hint, and retained all call, text, and voice interactions.
+- 2026-07-12: Removed the home page's mock time, signal, Wi-Fi, and battery chrome while retaining its 56rpx layout space so the brand and all lower content keep their original positions.
+- 2026-07-12: Replaced the profile tab's generic summary with a user card, 88% profile-completion display, anonymous-job-search switch, new-user 60-point trial quota, and personal-resume summary while preserving the shared navigation shell.
 - 2026-07-12: Added a minimal page-level `page` stylesheet to each primary shell entry route so uni-app emits the required `.wxss` files for WeChat DevTools; this fixes the runtime `ENOENT` for `pages/digital-human/index.wxss` without changing the persistent-shell navigation behavior.
 - 2026-07-12: Replaced five primary-menu page-stack transitions with one persistent `DefaultLayout` shell. `AppTabBar` now emits only the selected key, while the shell selects one content view through a `v-if` branch; no primary-menu interaction calls `navigateTo`, `navigateBack`, or `reLaunch`.
 - 2026-07-12: Moved the existing home, digital-human, and job business content into `components/business/*TabContent.vue`; retained the five direct page entry routes as thin shell wrappers for deep-entry compatibility.
