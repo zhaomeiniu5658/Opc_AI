@@ -1,14 +1,17 @@
 ﻿<template>
   <view class="default-layout">
-    <slot>
+    <template v-if="shell && activeTab === 'home'">
+      <slot />
+    </template>
+    <template v-else>
       <view class="app-page default-layout-page">
         <scroll-view class="default-layout-scroll" scroll-y :show-scrollbar="false">
-          <NavBar :title="meta.title" :subtitle="meta.description" />
+          <NavBar :title="currentMeta.title" :subtitle="currentMeta.description" />
           <view class="layout-panel panel fade-in">
             <view class="layout-head">
               <view>
-                <text class="layout-title">{{ meta.title }}</text>
-                <text class="layout-desc">{{ meta.description }}</text>
+                <text class="layout-title">{{ currentMeta.title }}</text>
+                <text class="layout-desc">{{ currentMeta.description }}</text>
               </view>
               <text class="layout-badge">Mock</text>
             </view>
@@ -17,32 +20,38 @@
             <EmptyState
               v-else-if="state === 'empty'"
               title="当前暂无数据"
-              :description="meta.description"
+              :description="currentMeta.description"
             />
             <ErrorState v-else-if="state === 'error'" />
             <view v-else class="layout-body">
-              <view v-for="item in meta.stats" :key="item" class="stat-item">
+              <view v-for="item in currentMeta.stats" :key="item" class="stat-item">
                 <text>{{ item }}</text>
               </view>
             </view>
           </view>
         </scroll-view>
       </view>
-    </slot>
+    </template>
     <AppTabBar />
   </view>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import AppTabBar from '@/components/common/AppTabBar.vue'
 import EmptyState from '@/components/common/EmptyState.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import Loading from '@/components/common/Loading.vue'
 import NavBar from '@/components/common/NavBar.vue'
+import { pageRegistry } from '@/data/pageRegistry.js'
+import { useAppStore } from '@/store/app.js'
 
-defineProps({
+const props = defineProps({
+  shell: {
+    type: Boolean,
+    default: false,
+  },
   meta: {
     type: Object,
     default: () => ({
@@ -53,7 +62,20 @@ defineProps({
   },
 })
 
+const appStore = useAppStore()
 const state = ref('ready')
+const activeTab = computed(() => appStore.activeTab)
+const tabMeta = {
+  advisor: pageRegistry.digitalHuman,
+  job: pageRegistry.jobList,
+  growth: pageRegistry.careerRoadmap,
+  profile: pageRegistry.profile,
+}
+const currentMeta = computed(() => {
+  if (!props.shell) return props.meta
+
+  return tabMeta[activeTab.value] || props.meta
+})
 </script>
 <style lang="scss" scoped>
 .default-layout {

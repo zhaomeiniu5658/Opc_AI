@@ -26,10 +26,13 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 
-import { navigateTo } from '@/utils/navigation.js'
+import { useAppStore } from '@/store/app.js'
+import { reLaunch } from '@/utils/navigation.js'
 
 const currentRoute = ref('')
+const isTransitioning = ref(false)
 let routeTimer = null
+const appStore = useAppStore()
 
 const hiddenRoutePrefixes = ['pages/login', 'pages/common']
 
@@ -39,6 +42,7 @@ const visible = computed(
 
 const activeKey = computed(() => {
   const route = currentRoute.value
+  if (route === 'pages/index/index') return appStore.activeTab
   if (route.startsWith('pages/job')) return 'job'
   if (route.startsWith('pages/career') || route.startsWith('pages/graph')) return 'growth'
   if (
@@ -66,9 +70,9 @@ const growthActive = computed(() => activeKey.value === 'growth')
 const profileActive = computed(() => activeKey.value === 'profile')
 
 function readCurrentRoute() {
-  if (typeof globalThis.getCurrentPages !== 'function') return 'pages/index/index'
+  if (typeof getCurrentPages !== 'function') return 'pages/index/index'
 
-  const pages = globalThis.getCurrentPages()
+  const pages = getCurrentPages()
   return pages[pages.length - 1]?.route || 'pages/index/index'
 }
 
@@ -79,35 +83,45 @@ function syncCurrentRoute() {
   }
 }
 
-function goRoute(key, path) {
-  if (activeKey.value === key) return
-  navigateTo(path)
+function goRoute(key) {
+  if (activeKey.value === key || isTransitioning.value) return
+
+  isTransitioning.value = true
+  appStore.setActiveTab(key)
+
+  if (currentRoute.value === 'pages/index/index') {
+    isTransitioning.value = false
+    return
+  }
+
+  reLaunch(`/pages/index/index?tab=${key}`)
 }
 
 function goHome() {
-  goRoute('home', '/pages/index/index')
+  goRoute('home')
 }
 
 function goAdvisor() {
-  goRoute('advisor', '/pages/digital-human/index')
+  goRoute('advisor')
 }
 
 function goJob() {
-  goRoute('job', '/pages/job/list')
+  goRoute('job')
 }
 
 function goGrowth() {
-  goRoute('growth', '/pages/career/roadmap')
+  goRoute('growth')
 }
 
 function goProfile() {
-  goRoute('profile', '/pages/profile/index')
+  goRoute('profile')
 }
 
 syncCurrentRoute()
 
 onMounted(() => {
   syncCurrentRoute()
+  isTransitioning.value = false
   routeTimer = globalThis.setInterval(syncCurrentRoute, 200)
 })
 

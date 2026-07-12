@@ -1,5 +1,5 @@
 ﻿<template>
-  <default-layout>
+  <default-layout shell>
     <view class="app-page home-page">
       <scroll-view class="home-scroll" scroll-y :show-scrollbar="false">
         <view class="phone-status">
@@ -127,9 +127,7 @@
               <text class="resume-summary">{{ resumePreview.summary }}</text>
               <view class="skill-tags">
                 <text v-for="skill in resumePreview.skills" :key="skill" class="skill-tag">
-                  {{
-                    skill
-                  }}
+                  {{ skill }}
                 </text>
               </view>
             </view>
@@ -179,6 +177,7 @@
 </template>
 
 <script setup>
+import { onLoad } from '@dcloudio/uni-app'
 import { onMounted } from 'vue'
 
 import { useJob } from '@/composables/useJob.js'
@@ -225,6 +224,10 @@ const resumePreview = {
 
 const appStore = useAppStore()
 const { loadRecommendedJobs } = useJob()
+
+onLoad((query) => {
+  appStore.setActiveTab(query?.tab || 'home')
+})
 
 function go(path) {
   navigateTo(path)

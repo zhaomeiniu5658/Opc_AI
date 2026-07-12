@@ -18,6 +18,7 @@ export default [
         defineExpose: 'readonly',
         console: 'readonly',
         getApp: 'readonly',
+        getCurrentPages: 'readonly',
         process: 'readonly',
         clearTimeout: 'readonly',
         setTimeout: 'readonly',

@@ -1,6 +1,8 @@
 ﻿## 导航统一修复
 
-- 2026-07-12: Corrected the five custom bottom-navigation labels and set the global, app-root, and layout transition backgrounds to `#07111f` so `reLaunch` does not expose the platform default white background between pages.
+- 2026-07-12: Kept the five custom bottom-navigation destinations inside the existing home layout shell, so switching tabs does not recreate a WeChat page. Direct business-page navigation still returns to the shell with `reLaunch`; repeated tab taps are ignored during that return.
+- 2026-07-12: Read the current Mini Program route through the native `getCurrentPages()` global, preventing the custom tab bar from treating every business page as the home shell.
+- 2026-07-12: Corrected the five custom bottom-navigation labels and aligned the global, app-root, and layout backgrounds to `#07111f`.
 - 2026-07-11: Replaced `components/common/ModulePage.vue` with `layouts/DefaultLayout.vue`; registered it through `pages.json` easycom so pages no longer import layout or navigation components directly.
 - 2026-07-11: Added the shared `ErrorState.vue` and made `DefaultLayout` the only source reference to `AppTabBar.vue` and `NavBar.vue`.
 - 2026-07-11: Restored a minimal App.vue root template so mp-weixin consistently emits App.wxml without reintroducing an AppTabBar mount.
