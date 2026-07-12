@@ -1,0 +1,124 @@
+openapi: 3.0.0
+info:
+  title: AI智能招聘平台 API
+  version: 1.0.0
+servers:
+  - url: /api
+    description: 开发环境
+paths:
+  /v1/auth/login:
+    post:
+      summary: 用户登录
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                code:
+                  type: string
+      responses:
+        '200':
+          description: 登录成功
+  /v1/user/profile:
+    get:
+      summary: 获取用户资料
+      responses:
+        '200':
+          description: 用户资料
+  /v1/resume/upload:
+    post:
+      summary: 上传简历
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 返回任务与简历 ID
+  /v1/resume/analysis/{resume_id}:
+    get:
+      summary: 获取简历分析结果
+      parameters:
+        - name: resume_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 简历分析结果
+  /v1/resume/history:
+    get:
+      summary: 简历历史
+      responses:
+        '200':
+          description: 简历历史列表
+  /v1/job/list:
+    get:
+      summary: 岗位列表
+      parameters:
+        - name: keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 岗位列表
+  /v1/recommendation/list:
+    get:
+      summary: 推荐岗位列表
+      responses:
+        '200':
+          description: 推荐岗位
+  /v1/recommendation/report:
+    get:
+      summary: 推荐分析报告
+      responses:
+        '200':
+          description: 推荐分析报告
+  /v1/interview/mock:
+    post:
+      summary: 创建模拟面试
+      responses:
+        '200':
+          description: 面试结果
+  /v1/interview/history:
+    get:
+      summary: 面试记录
+      responses:
+        '200':
+          description: 面试历史
+  /v1/membership/profile:
+    get:
+      summary: 会员状态
+      responses:
+        '200':
+          description: 会员资料
+  /v1/order/create:
+    post:
+      summary: 创建会员订单
+      responses:
+        '200':
+          description: 订单信息
+  /v1/message/list:
+    get:
+      summary: 消息列表
+      responses:
+        '200':
+          description: 消息列表
+  /v1/digital-human/config:
+    get:
+      summary: 获取数字人配置
+      responses:
+        '200':
+          description: 数字人开关配置

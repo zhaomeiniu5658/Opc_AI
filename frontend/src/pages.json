@@ -1,0 +1,287 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^u-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^default-layout$": "@/layouts/DefaultLayout.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#07111f",
+        "backgroundColorTop": "#07111f",
+        "backgroundColorBottom": "#07111f",
+        "backgroundTextStyle": "light",
+        "navigationBarTitleText": "AI智能招聘"
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "登录注册"
+      }
+    },
+    {
+      "path": "pages/login/agreement",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "用户协议"
+      }
+    },
+    {
+      "path": "pages/resume/upload",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "简历上传"
+      }
+    },
+    {
+      "path": "pages/resume/analysis",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "AI 简历分析"
+      }
+    },
+    {
+      "path": "pages/resume/optimize",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "AI 简历优化"
+      }
+    },
+    {
+      "path": "pages/resume/history",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "历史简历"
+      }
+    },
+    {
+      "path": "pages/resume/detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "简历详情"
+      }
+    },
+    {
+      "path": "pages/job/list",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#07111f",
+        "backgroundColorTop": "#07111f",
+        "backgroundColorBottom": "#07111f",
+        "backgroundTextStyle": "light",
+        "navigationBarTitleText": "岗位列表"
+      }
+    },
+    {
+      "path": "pages/job/detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "岗位详情"
+      }
+    },
+    {
+      "path": "pages/job/search",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "岗位搜索"
+      }
+    },
+    {
+      "path": "pages/job/company",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "企业详情"
+      }
+    },
+    {
+      "path": "pages/recommendation/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "AI 推荐"
+      }
+    },
+    {
+      "path": "pages/recommendation/report",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "推荐报告"
+      }
+    },
+    {
+      "path": "pages/interview/mock",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "AI 模拟面试"
+      }
+    },
+    {
+      "path": "pages/interview/result",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "面试结果"
+      }
+    },
+    {
+      "path": "pages/interview/history",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "面试记录"
+      }
+    },
+    {
+      "path": "pages/career/profile",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "职业画像"
+      }
+    },
+    {
+      "path": "pages/career/roadmap",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "职业路线"
+      }
+    },
+    {
+      "path": "pages/career/report",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "职业报告"
+      }
+    },
+    {
+      "path": "pages/graph/relationship",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "人才关系图谱"
+      }
+    },
+    {
+      "path": "pages/graph/company",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "企业关系图谱"
+      }
+    },
+    {
+      "path": "pages/graph/network",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "行业关系网络"
+      }
+    },
+    {
+      "path": "pages/membership/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "会员中心"
+      }
+    },
+    {
+      "path": "pages/membership/order",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "会员订单"
+      }
+    },
+    {
+      "path": "pages/membership/benefit",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "会员权益"
+      }
+    },
+    {
+      "path": "pages/profile/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的"
+      }
+    },
+    {
+      "path": "pages/profile/settings",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "用户设置"
+      }
+    },
+    {
+      "path": "pages/profile/security",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "账号安全"
+      }
+    },
+    {
+      "path": "pages/profile/feedback",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "用户反馈"
+      }
+    },
+    {
+      "path": "pages/profile/about",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "关于平台"
+      }
+    },
+    {
+      "path": "pages/message/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "消息中心"
+      }
+    },
+    {
+      "path": "pages/message/detail",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "消息详情"
+      }
+    },
+    {
+      "path": "pages/digital-human/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "AI 数字人"
+      }
+    },
+    {
+      "path": "pages/common/webview",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "WebView"
+      }
+    },
+    {
+      "path": "pages/common/error",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "错误页"
+      }
+    },
+    {
+      "path": "pages/common/empty",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "空数据页"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "AI智能招聘",
+    "navigationBarBackgroundColor": "#07111f",
+    "backgroundColor": "#07111f",
+    "backgroundColorTop": "#07111f",
+    "backgroundColorBottom": "#07111f",
+    "backgroundTextStyle": "light"
+  }
+}
