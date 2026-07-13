@@ -13,9 +13,7 @@
           <text class="digital-subtitle">你的专属求职顾问</text>
         </view>
         <view class="digital-call-trigger" hover-class="digital-call-trigger-hover" @tap="startCall">
-          <view class="digital-call-icon">
-            <view class="digital-call-receiver"></view>
-          </view>
+          <image class="digital-call-icon" src="/static/icons/phone-outline.png" mode="aspectFit" />
         </view>
       </view>
 
@@ -56,9 +54,7 @@
       <view class="conversation-composer">
         <view v-if="inputMode === 'text'" class="composer-row">
           <view class="composer-mode" @tap="toggleInputMode">
-            <view class="composer-mic-icon">
-              <view class="composer-mic-stand"></view>
-            </view>
+            <image class="composer-mic-icon" src="/static/icons/microphone-filled.png" mode="aspectFit" />
           </view>
           <input
             v-model="draft"
@@ -69,7 +65,7 @@
             @confirm="sendMessage"
           />
           <view class="composer-send" :class="{ 'composer-send-ready': canSend }" @tap="sendMessage">
-            <view class="composer-send-icon"></view>
+            <image class="composer-send-icon" src="/static/icons/send-filled.png" mode="aspectFit" />
           </view>
         </view>
         <view v-else class="composer-row">
@@ -325,9 +321,9 @@ function showToast(title) {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 58rpx;
-  height: 58rpx;
-  margin-top: 18rpx;
+  width: 70rpx;
+  height: 70rpx;
+  margin-top: 12rpx;
   border: 1px solid rgba(169, 156, 255, 0.38);
   border-radius: 50%;
   background: rgba(20, 30, 58, 0.82);
@@ -340,42 +336,10 @@ function showToast(title) {
 }
 
 .digital-call-icon {
-  position: relative;
-  width: 32rpx;
-  height: 32rpx;
-  color: currentColor;
-  transform: rotate(-42deg);
-}
-
-.digital-call-receiver {
-  position: absolute;
-  top: 6rpx;
-  left: 10rpx;
-  width: 12rpx;
-  height: 20rpx;
-  border-right: 5rpx solid currentColor;
-  border-left: 5rpx solid currentColor;
-  border-radius: 10rpx;
-}
-
-.digital-call-receiver::before,
-.digital-call-receiver::after {
-  position: absolute;
-  width: 15rpx;
-  height: 8rpx;
-  border-radius: 4rpx;
-  background: currentColor;
-  content: '';
-}
-
-.digital-call-receiver::before {
-  top: -5rpx;
-  left: -7rpx;
-}
-
-.digital-call-receiver::after {
-  right: -7rpx;
-  bottom: -5rpx;
+  display: block;
+  flex: 0 0 auto;
+  width: 58rpx;
+  height: 58rpx;
 }
 
 .digital-hero {
@@ -523,53 +487,10 @@ function showToast(title) {
 }
 
 .composer-mic-icon {
-  position: relative;
-  width: 30rpx;
-  height: 34rpx;
-}
-
-.composer-mic-icon::before {
-  position: absolute;
-  top: 1rpx;
-  left: 8rpx;
-  width: 10rpx;
-  height: 18rpx;
-  border: 3rpx solid currentColor;
-  border-radius: 10rpx;
-  content: '';
-}
-
-.composer-mic-icon::after {
-  position: absolute;
-  top: 10rpx;
-  left: 4rpx;
-  width: 18rpx;
-  height: 12rpx;
-  border: 3rpx solid currentColor;
-  border-top: 0;
-  border-radius: 0 0 12rpx 12rpx;
-  content: '';
-}
-
-.composer-mic-stand {
-  position: absolute;
-  bottom: 1rpx;
-  left: 14rpx;
-  width: 3rpx;
-  height: 8rpx;
-  border-radius: 999px;
-  background: currentColor;
-}
-
-.composer-mic-stand::after {
-  position: absolute;
-  bottom: 0;
-  left: -5rpx;
-  width: 13rpx;
-  height: 3rpx;
-  border-radius: 999px;
-  background: currentColor;
-  content: '';
+  display: block;
+  flex: 0 0 auto;
+  width: 48rpx;
+  height: 48rpx;
 }
 
 .composer-input {
@@ -581,19 +502,16 @@ function showToast(title) {
 }
 
 .composer-send {
-  min-width: 82rpx;
-  padding: 0 14rpx;
-  background: rgba(65, 82, 116, 0.74);
-  color: #9fb1c8;
+  width: 72rpx;
+  background: rgba(91, 46, 255, 0.22);
+  color: #d9d3ff;
 }
 
 .composer-send-icon {
-  width: 0;
-  height: 0;
-  border-top: 13rpx solid transparent;
-  border-bottom: 13rpx solid transparent;
-  border-left: 28rpx solid currentColor;
-  transform: rotate(-34deg);
+  display: block;
+  flex: 0 0 auto;
+  width: 48rpx;
+  height: 48rpx;
 }
 
 .composer-send-ready {

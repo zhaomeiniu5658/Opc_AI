@@ -215,7 +215,10 @@ frontend/
     |   |   |-- fonts/
     |   |   |   `-- .keep - 占位文件
     |   |   |-- icons/
-    |   |   |   `-- .keep - 占位文件
+    |   |   |   |-- .keep - 占位文件
+    |   |   |   |-- microphone-filled.png - 图标资源占位
+    |   |   |   |-- phone-outline.png - 图标资源占位
+    |   |   |   `-- send-filled.png - 图标资源占位
     |   |   |-- images/
     |   |   |   `-- ai-assistant-reference.png - AI 助手参考图
     |   |   `-- logo.png - 文件

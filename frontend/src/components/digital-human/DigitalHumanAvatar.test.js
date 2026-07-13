@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -40,10 +40,22 @@ describe('digital human avatar integration', () => {
   it('keeps the digital-human controls icon-only and removes redundant copy', () => {
     expect(digitalHumanContentSource).toContain('class="digital-call-trigger"')
     expect(digitalHumanContentSource).toContain('class="digital-call-icon"')
-    expect(digitalHumanContentSource).toContain('class="digital-call-receiver"')
+    expect(digitalHumanContentSource).toContain('/static/icons/phone-outline.png')
+    expect(digitalHumanContentSource).toContain('/static/icons/microphone-filled.png')
+    expect(digitalHumanContentSource).toContain('/static/icons/send-filled.png')
+    expect(digitalHumanContentSource).toContain('width: 70rpx')
+    expect(digitalHumanContentSource).toContain('height: 70rpx')
+    expect(digitalHumanContentSource).toContain('width: 58rpx')
+    expect(digitalHumanContentSource).toContain('height: 58rpx')
+    expect(existsSync(resolve(currentDirectory, '../../static/icons/phone-outline.png'))).toBe(true)
+    expect(existsSync(resolve(currentDirectory, '../../static/icons/microphone-filled.png'))).toBe(true)
+    expect(existsSync(resolve(currentDirectory, '../../static/icons/send-filled.png'))).toBe(true)
+    expect(digitalHumanContentSource).not.toContain('digital-call-handset')
+    expect(digitalHumanContentSource).not.toContain('digital-call-glyph')
     expect(digitalHumanContentSource).toContain('class="composer-mic-icon"')
+    expect(digitalHumanContentSource).not.toContain('composer-mic-stand')
     expect(digitalHumanContentSource).toContain('class="composer-send-icon"')
-    expect(digitalHumanContentSource).toContain('border-left: 28rpx solid currentColor')
+    expect(digitalHumanContentSource).not.toContain('border-left: 28rpx solid currentColor')
     expect(digitalHumanContentSource).not.toContain('拨打电话')
     expect(digitalHumanContentSource).not.toContain('求职数字人')
     expect(digitalHumanContentSource).not.toContain('支持文字输入和语音输入')

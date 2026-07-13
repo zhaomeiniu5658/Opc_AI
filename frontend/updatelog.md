@@ -1,5 +1,12 @@
 ﻿## 导航统一修复
 
+- 2026-07-13: Enlarged the digital-human call control's circular background by about 20% while offsetting it upward to preserve its original visual center alignment.
+- 2026-07-13: Enlarged the approved local phone icon by about 20% and replaced the CSS triangle send control with a centered local filled-paper-plane asset using the same purple button treatment as the microphone control.
+- 2026-07-13: Reworked the digital-human call control as a telephone handset with two outgoing call-wave marks to match the approved call-icon type.
+- 2026-07-13: Updated the digital-human voice input icon to use a filled microphone capsule, U-shaped support, and base matching the approved microphone type.
+- 2026-07-13: Simplified the digital-human call control to the approved gray linear telephone receiver without call-wave marks.
+- 2026-07-13: Replaced the CSS-drawn telephone and microphone with centered local transparent icon assets derived from the approved references, preserving the phone's approved angle.
+- 2026-07-13: Increased the local telephone and microphone icon display boxes to keep their visible strokes optically centered at mini-program scale.
 - 2026-07-12: Renamed the home brand to 数字人求职顾问 and moved the home digital-human stage upward so its top aligns with the brand text top.
 - 2026-07-12: Aligned the first visible control in the digital-human, job, growth, and profile tabs to `calc(121rpx + var(--status-bar-height))` from the page top.
 - 2026-07-12: Replaced the digital-human page's call, voice-input, and send labels with static phone, microphone, and send-arrow icons without adding icon-font loading.
