@@ -4,13 +4,13 @@
   "type": "module",
   "scripts": {
     "docs:tree": "node scripts/update-readme-tree.mjs",
-    "dev:h5": "pnpm docs:tree && uni",
-    "dev:mp-weixin": "pnpm docs:tree && uni -p mp-weixin",
-    "build:h5": "pnpm docs:tree && uni build",
-    "build:mp-weixin": "pnpm docs:tree && uni build -p mp-weixin",
-    "lint": "pnpm docs:tree && eslint .",
-    "format": "pnpm docs:tree && prettier --check .",
-    "test": "pnpm docs:tree && vitest run"
+    "dev:h5": "node scripts/update-readme-tree.mjs && uni",
+    "dev:mp-weixin": "node scripts/update-readme-tree.mjs && uni -p mp-weixin",
+    "build:h5": "node scripts/update-readme-tree.mjs && uni build",
+    "build:mp-weixin": "node scripts/update-readme-tree.mjs && uni build -p mp-weixin",
+    "lint": "node scripts/update-readme-tree.mjs && eslint .",
+    "format": "node scripts/update-readme-tree.mjs && prettier --check .",
+    "test": "node scripts/update-readme-tree.mjs && vitest run"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-5010520260709002",

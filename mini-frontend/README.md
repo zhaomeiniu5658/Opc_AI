@@ -163,8 +163,6 @@ frontend/
     |   |-- layouts/
     |   |   |-- DefaultLayout.test.js - 测试文件
     |   |   `-- DefaultLayout.vue - 唯一页面公共布局
-    |   |-- models/
-    |   |   `-- .keep - 占位文件
     |   |-- pages/
     |   |   |-- career/
     |   |   |   `-- roadmap.vue - 职业路线页

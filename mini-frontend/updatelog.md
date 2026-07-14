@@ -1,5 +1,6 @@
 ﻿## 导航统一修复
 
+- 2026-07-14 10:36: Added the current package to `pnpm-workspace.yaml` and removed nested `pnpm docs:tree` calls from npm scripts so a fresh Corepack-based setup can install dependencies and build the WeChat Mini Program output.
 - 2026-07-13: Enlarged the digital-human call control's circular background by about 20% while offsetting it upward to preserve its original visual center alignment.
 - 2026-07-13: Enlarged the approved local phone icon by about 20% and replaced the CSS triangle send control with a centered local filled-paper-plane asset using the same purple button treatment as the microphone control.
 - 2026-07-13: Reworked the digital-human call control as a telephone handset with two outgoing call-wave marks to match the approved call-icon type.
